@@ -23,6 +23,41 @@ $ npm install webpack@2.2.0-rc.3
 `<br>
 <br>
 webpack简单点来说就是一个配置文件，这个配置文件主要分为三大块:<br>
--`entry` 入口文件 让webpack用哪个文件作为项目的入口
--`output` 出口 让webpack把处理完成的文件放在哪里
--`module` 模块 要用什么不同的模块来处理各种类型的文件
+-*entry* 入口文件 让webpack用哪个文件作为项目的入口<br>
+-*output* 出口 让webpack把处理完成的文件放在哪里<br>
+-*module* 模块 要用什么不同的模块来处理各种类型的文件<br>
+##demo01
+index.html<br>
+`
+<!DOCTYPE html>
+<html>
+<head>
+    <title>webpack demo01</title>
+</head>
+<body>
+    <script type="text/javascript" src="boudle.js"></script>
+</body>
+</html>
+`
+main.js<br>
+`
+document.write('<h1>hello world</h1>');
+`
+webpack.config.js<br>
+`
+module.exports = {
+    entry: './main.js',
+    output:{
+        filename: 'boudle.js'
+    }
+};
+`<br>
+3个文件放到demo01文件夹中后，点击index.html没有任何内容出现<br>
+###运行命令
+`
+$ webpack
+//文件夹中生成boudle.js文件
+$webpack-dev-server
+//点击index.html,可在浏览器中看到"hello world"
+`
+
