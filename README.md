@@ -17,7 +17,12 @@ $ npm install webpack --save-dev
 `<br>
 `--save` 通过这个参数，将保存配置信息至package.json（package.json是node.js项目配置文件）<br>
 `--save-dev` 保存至package.json的devDependencies属性，不指定-dev将保存至dependencies属性。（dependencies字段指定了项目运行所依赖的模块，devDependencies指定项目开发所需要的模块。）<br>
-*安装指定版本*，命令如下：<br>
+**安装指定版本**，命令如下：<br>
 `
 $ npm install webpack@2.2.0-rc.3
-`
+`<br>
+<br>
+webpack简单点来说就是一个配置文件，这个配置文件主要分为三大块:<br>
+*`entry` 入口文件 让webpack用哪个文件作为项目的入口
+*`output` 出口 让webpack把处理完成的文件放在哪里
+*`module` 模块 要用什么不同的模块来处理各种类型的文件
