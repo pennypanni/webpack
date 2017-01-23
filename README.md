@@ -35,7 +35,7 @@ index.html<br>
     <title>webpack demo01</title>
 </head>
 <body>
-    <script type="text/javascript" src="boudle.js"></script>
+    <script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>
 `
@@ -48,7 +48,7 @@ webpack.config.js<br>
 module.exports = {
     entry: './main.js',
     output:{
-        filename: 'boudle.js'
+        filename: 'bundle.js'
     }
 };
 `<br>
@@ -56,7 +56,7 @@ module.exports = {
 ###运行命令
 `
 $ webpack
-//文件夹中生成boudle.js文件
+//文件夹中生成bundle.js文件
 $webpack-dev-server
 //点击index.html,可在浏览器中看到"hello world"
 `
