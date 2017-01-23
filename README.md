@@ -60,4 +60,13 @@ $ webpack
 $webpack-dev-server
 //点击index.html,可在浏览器中看到"hello world"
 `
+##功能介绍
+###Loaders
+通过使用不同的loader，webpack通过调用外部的脚本或工具可以对各种各样的格式的文件进行处理，比如说分析JSON文件并把它转换为JavaScript文件，或者说把下一代的JS文件（ES6，ES7)转换为现代浏览器可以识别的JS文件。或者说对React的开发而言，合适的Loaders可以把React的JSX文件转换为JS文件。[http://webpackdoc.com/loader.html](http://webpackdoc.com/loader.html)
 
+Loaders需要单独安装并且需要在webpack.config.js下的modules关键字下进行配置，Loaders的配置选项包括以下几方面：
+
+*test：一个匹配loaders所处理的文件的拓展名的正则表达式（必须）
+*loader：loader的名称（必须）
+*include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
+*query：为loaders提供额外的设置选项（可选）
