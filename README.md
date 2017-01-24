@@ -85,11 +85,14 @@ Loaders需要单独安装并且需要在webpack.config.js下的modules关键字�
 * loader：loader的名称（必须）
 * include/exclude：手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
 * query：为loaders提供额外的设置选项（可选）
+
 ### Babel
 Babel是一个编译JavaScript的平台，它的作用：
 * 下一代的JavaScript标准（ES6，ES7），这些标准目前并未被当前的浏览器完全的支持；
 * 使用基于JavaScript进行了拓展的语言，比如React的JSX
+
 Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，不过webpack把它们整合在一起使用，但是对于每一个你需要的功能或拓展，你都需要安装单独的包（用得最多的是解析Es6的babel-preset-es2015包和解析JSX的babel-preset-react包）。
+
 #### demo02
 index.html
 
