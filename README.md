@@ -94,6 +94,7 @@ Babel是一个编译JavaScript的平台，它的作用：
 Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，不过webpack把它们整合在一起使用，但是对于每一个你需要的功能或拓展，你都需要安装单独的包（用得最多的是解析Es6的babel-preset-es2015包和解析JSX的babel-preset-react包）。
 
 [demo02](./demo02)
+
 index.html
 
 ```html
@@ -200,7 +201,9 @@ module.exports = {
 
 安装依赖：
 
-`npm install --save css-loader style-loader`
+```
+npm install --save css-loader style-loader
+```
 
 运行webpack,打开index.html页面，可以看到style-loader将css样式以嵌入式插入页面，见下图：  
-![嵌入式css样式]（../demo03/qianrushi.png）
+![嵌入式css样式]（demo03/qianrushi.png）
