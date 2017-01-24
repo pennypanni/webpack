@@ -36,7 +36,6 @@ webpack简单点来说就是一个配置文件，这个配置文件主要分为�
 index.html
 
 ```
-<!DOCTYPE html>
 <html>
 	<head>
 	    <title>webpack demo01</title>
@@ -64,15 +63,17 @@ module.exports = {
 };
 ```
 
-3个文件放到demo01文件夹中后，点击index.html没有任何内容出现<br>
+3个文件放到[demo01](./demo01)文件夹中后，点击index.html没有任何内容出现
 ### 运行命令
 
 ```
 $ webpack
-//文件夹中生成bundle.js文件
+//文件夹中生成bundle.js文件,点击index.html,可在浏览器中看到"hello world"
+
+或
 
 $ webpack-dev-server
-//点击index.html,可在浏览器中看到"hello world"
+//可以使用 http://localhost:8080 来预览
 ```
 
 ## 功能介绍
@@ -80,8 +81,68 @@ $ webpack-dev-server
 通过使用不同的loader，webpack通过调用外部的脚本或工具可以对各种各样的格式的文件进行处理，比如说分析JSON文件并把它转换为JavaScript文件，或者说把下一代的JS文件（ES6，ES7)转换为现代浏览器可以识别的JS文件。或者说对React的开发而言，合适的Loaders可以把React的JSX文件转换为JS文件。[http://webpackdoc.com/loader.html](http://webpackdoc.com/loader.html)
 
 Loaders需要单独安装并且需要在webpack.config.js下的modules关键字下进行配置，Loaders的配置选项包括以下几方面：
-
 * test：一个匹配loaders所处理的文件的拓展名的正则表达式（必须）
 * loader：loader的名称（必须）
-* include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
+* include/exclude：手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
 * query：为loaders提供额外的设置选项（可选）
+### Babel
+Babel是一个编译JavaScript的平台，它的作用：
+* 下一代的JavaScript标准（ES6，ES7），这些标准目前并未被当前的浏览器完全的支持；
+* 使用基于JavaScript进行了拓展的语言，比如React的JSX
+Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，不过webpack把它们整合在一起使用，但是对于每一个你需要的功能或拓展，你都需要安装单独的包（用得最多的是解析Es6的babel-preset-es2015包和解析JSX的babel-preset-react包）。
+#### demo02
+index.html
+
+```
+<html>
+	<head>
+	    <title>webpack demo02 Babel</title>
+	</head>
+	<body>
+	    <div id="wrapper"></div>
+	    <script type="text/javascript" src="bundle.js"></script>
+	</body>
+</html>
+```
+
+main.`jsx`
+
+```
+const React = require('react');
+const ReactDOM = require('react-dom');
+
+ReactDOM.render(
+    <h1>Hello, world!</h1>,
+    document.querySelector('#wrapper')
+);
+```
+
+webpack.config.js
+
+```
+module.exports = {    
+    entry: './main.jsx',
+    output: {
+        filename: 'bundle.js'
+    },
+    module: {
+    <font color=red>
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel',   //.jsx文件使用babel处理
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }
+        ]
+    </font>    
+    }
+};
+```
+需安装多个依赖包：
+```
+npm install --save babel-core babel-loader babel-preset-es2015 babel-preset-react react react-dom
+```
+
