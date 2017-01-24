@@ -93,7 +93,7 @@ Babel是一个编译JavaScript的平台，它的作用：
 
 Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，不过webpack把它们整合在一起使用，但是对于每一个你需要的功能或拓展，你都需要安装单独的包（用得最多的是解析Es6的babel-preset-es2015包和解析JSX的babel-preset-react包）。
 
-#### demo02
+[demo02](./demo02)
 index.html
 
 ```html
@@ -116,7 +116,7 @@ const ReactDOM = require('react-dom');
 
 ReactDOM.render(
     <h1>Hello, world!</h1>,
-    document.querySelector('#wrapper')
+    document.querySelector('#wrapper')     //将h1标题插入#wrapper节点
 );
 ```
 
@@ -147,3 +147,60 @@ module.exports = {
 npm install --save babel-core babel-loader babel-preset-es2015 babel-preset-react react react-dom
 ```
 
+### CSS加载
+webpack提供两个工具处理样式表，css-loader 和 style-loader，二者处理的任务不同，css-loader使你能够使用类似@import和 url(...)的方法实现 require()的功能,style-loader将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中。
+
+[demo03](./demo03)
+
+main.js
+
+```javascript
+require('./app.css');
+```
+
+app.css
+
+```css
+body{
+	background-color: blue;
+	color:yellow;
+	text-align: center;
+	font-size:100px;
+};
+```
+
+index.html
+
+```html
+<html>
+	<head>
+		<script type="text/javascript" src="bundle.js"></script>
+	</head>
+	<body>
+		<h1>Hello World</h1>
+	</body>
+</html>
+```
+
+webpack.config.js
+
+```javascript
+module.exports = {
+    entry: './main.js',
+    output: {
+      filename: 'bundle.js'
+    },
+    module: {
+      loaders:[
+        { test: /\.css$/, loader: 'style-loader!css-loader' },
+      ]
+    }
+};
+```
+
+安装依赖：
+
+`npm install --save css-loader style-loader`
+
+运行webpack,打开index.html页面，可以看到style-loader将css样式以嵌入式插入页面，见下图：  
+![嵌入式css样式]（../demo03/qianrushi.png）
