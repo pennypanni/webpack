@@ -3,16 +3,16 @@
 Node.js 自带了软件包管理器 npm。首先用`npm -v`查看是否安装了Node.js。没有的话，先从网上下载并安装。[https://nodejs.org/en/download/](https://nodejs.org/en/download/)<br>
 点击开始--运行--cmd，输入`node --version`可以检查Node.js版本。<br>
 ### 安装package.json<br>
-```
-$ npm init #生成package.json文件
+```bash
+$ npm init   #生成package.json文件
 ```
 ### 安装webpack
 #### 全局安装
-```
+```bash
 $ npm install webpack -g
 ```
 #### 本地安装
-```
+```bash
 $ npm install webpack --save-dev
 ```
 
@@ -22,7 +22,7 @@ $ npm install webpack --save-dev
 
 **安装指定版本**，命令如下：
 
-```
+```bash
 $ npm install webpack@2.2.0-rc.3
 ```
 
@@ -35,7 +35,7 @@ webpack简单点来说就是一个配置文件，这个配置文件主要分为�
 ## demo01
 index.html
 
-```
+```html
 <html>
 	<head>
 	    <title>webpack demo01</title>
@@ -48,13 +48,13 @@ index.html
 
 main.js
 
-```
+```javascript
 document.write('<h1>hello world</h1>');
 ```
 
 webpack.config.js
 
-```
+```javascript
 module.exports = {
     entry: './main.js',
     output:{
@@ -96,7 +96,7 @@ Babel其实是几个模块化的包，其核心功能位于称为babel-core的np
 #### demo02
 index.html
 
-```
+```html
 <html>
 	<head>
 	    <title>webpack demo02 Babel</title>
@@ -110,7 +110,7 @@ index.html
 
 main.`jsx`
 
-```
+```xml
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -122,14 +122,13 @@ ReactDOM.render(
 
 webpack.config.js
 
-```
+```javascript
 module.exports = {    
     entry: './main.jsx',
     output: {
         filename: 'bundle.js'
     },
     module: {
-    <font color=red>
         loaders: [
             {
                 test: /\.jsx?$/,
@@ -139,8 +138,7 @@ module.exports = {
                     presets: ['es2015', 'react']
                 }
             }
-        ]
-    </font>    
+        ]   
     }
 };
 ```
