@@ -4,7 +4,7 @@ Node.js 自带了软件包管理器 npm。首先用`npm -v`查看是否安装了
 点击开始--运行--cmd，输入`node --version`可以检查Node.js版本。<br>
 ### 安装package.json<br>
 ```bash
-$ npm init   #生成package.json文件
+$ npm init      #生成package.json文件
 ```
 ### 安装webpack
 #### 全局安装
@@ -66,7 +66,7 @@ module.exports = {
 3个文件放到[demo01](./demo01)文件夹中后，点击index.html没有任何内容出现
 ### 运行命令
 
-```
+```bash
 $ webpack
 //文件夹中生成bundle.js文件,点击index.html,可在浏览器中看到"hello world"
 
@@ -110,7 +110,7 @@ index.html
 
 main.`jsx`
 
-```xml
+```javascript
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -133,7 +133,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel',   //.jsx文件使用babel处理
+                loader: 'babel',    //.jsx文件使用babel处理
                 query: {
                     presets: ['es2015', 'react']
                 }
