@@ -209,3 +209,5 @@ npm install --save css-loader style-loader
 ![嵌入式css样式]（demo03/qianrushi.png）
 
 ### 图片加载
+test01
+test02
