@@ -206,8 +206,53 @@ npm install --save css-loader style-loader
 ```
 
 运行webpack,打开index.html页面，可以看到style-loader将css样式以嵌入式插入页面，见下图：  
-![嵌入式css样式]（demo03/qianrushi.png）
+![嵌入式样式](demo03/qianrushi.png)
 
 ### 图片加载
-test01
-test02
+见[demo04](demo04)
+
+index.html
+
+```html
+<html>
+	<body>
+		<script type="text/javascript" src="bundle.js"></script>
+	</body>
+</html>
+```
+main.js
+
+```javascript
+var img1= document.createElement("img");
+img1.src=require("./small.jpeg");
+document.body.appendChild("img1");
+
+var img2= document.createElement("img");
+img2.src=require("./big.jpg");
+document.body.appendChild("img2");
+```
+
+webpack.config.js
+
+```javascript
+module.exports = {
+	entry: './main.js',
+	output: {
+		filename: 'bundle.js'
+	},
+	module:{
+		loaders:[
+			{ test:/\.(jpeg|jpg)$/,loader:'url-loader?limit=8192' }
+		]
+	}
+};
+```
+安装依赖`url-loader`和`file-loader`：
+```
+npm install url-loader file-loader --save
+```
+`'url-loader?limit=8192'`表示：当图片小于8192bytes即8KB时，会将图片生成为`data:image/png;base64,`base64图片。<br>
+demo04中，原本有small.png和big.jpg两张图片，运行webpack后，big.jpg生成了`1da144414b9e1758b5d0139275a868bc.jpg`。
+
+打开index.html，可以看到两张图片不同的加载方式。
+![图片的两种加载方式](demo04/twomethodjietu.png)
