@@ -206,6 +206,7 @@ npm install --save css-loader style-loader
 ```
 
 运行webpack,打开index.html页面，可以看到style-loader将css样式以嵌入式插入页面，见下图：  
+
 ![嵌入式样式](demo03/qianrushi.png)
 
 ### 图片加载
