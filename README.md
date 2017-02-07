@@ -257,3 +257,74 @@ demo04中，原本有small.png和big.jpg两张图片，运行webpack后，big.jp
 
 打开index.html，可以看到两张图片不同的加载方式。
 ![图片的两种加载方式](demo04/twomethodjietu.png)
+
+### CSS组件加载
+[CSS Modules用法教程参考](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)
+
+CSS的规则都是全局的，任何一个组件的样式规则，都对整个页面有效。
+
+产生局部作用域的唯一方法，就是使用一个独一无二的`class`的名字，不会与其他选择器重名。这就是 CSS Modules 的做法。
+
+CSS Modules 允许使用`:global(.className)`的语法，声明一个全局规则。凡是这样声明的class，都不会被编译成哈希字符串。
+
+[demo05](./demo05)
+
+app.css
+
+```css
+.h1 {color:red; }    //局部，style.h1被编译成一个哈希字符串，成为一个独一无二的class名字
+:global(.h2) {color: blue; }    //全局
+```
+
+index.html
+
+```html
+<html>
+	<body>
+	    <div id="example"></div>
+	    <script src="./bundle.js"></script>
+	</body>
+</html>
+```
+
+main.jsx
+
+```
+var React = require('react');
+var ReactDOM = require('react-dom');
+var style = require('./app.css');
+ReactDOM.render(
+  <div>
+    <h1 className={style.h1}>Hello World</h1>
+    <h2 className="h2">Hello Webpack</h2>
+  </div>,
+  document.getElementById('example')
+);
+```
+
+webpack.config.js
+
+```javascript
+module.exports={
+	entry:'./main.jsx',
+	output: {
+		filename:'bundle.js'
+	},
+	module:{
+		loaders:[
+			{
+				test: /\.jsx?$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/,
+				query: {
+					presets: ['es2015','react']
+				}
+			},
+			{
+				test: /\.css$/,
+				loader: 'style-loader!css-loader?modules'
+			}	
+		]
+	}
+}
+```
