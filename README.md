@@ -329,3 +329,48 @@ module.exports={
 }
 ```
 上面代码中，`style-loader!css-loader?modules`，它在`css-loader`后面加了一个查询参数`modules`，表示打开CSS Modules 功能。
+
+### UglifyJs插件
+Loaders和Plugins常常被弄混，但是他们其实是完全不同的东西，可以这么来说，loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用。
+
+Webpack有很多内置插件，同时也有很多第三方插件，可以让我们完成更加丰富的功能。
+
+`UglifyJsPlugin是内置插件，用来压缩JS代码。`[demo06](./demo06)
+
+index.html
+
+```html
+<html>
+	<body>
+	  <script src="bundle.js"></script>
+	</body>
+</html>
+```
+
+main.js
+
+```javascript
+var longVariableName = 'Hello';
+longVariableName += ' World';
+document.write('<h1>' + longVariableName + '</h1>');
+```
+
+webpack.config.js
+
+```javascript
+var webpack=require('webpack')
+module.exports={
+	entry:'./main.js',
+	output:{
+		filename:'bundle.js'
+	},
+	plugins:[
+		new webpack.optimize.UglifyJsPlugin({
+			compress:{
+				warnings:false
+			}
+		})
+	]
+};
+```
+运行后，UglifyJsPlugin将`main.js`输出压缩版本的`bundle.js`。
