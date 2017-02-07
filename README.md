@@ -272,8 +272,8 @@ CSS Modules 允许使用`:global(.className)`的语法，声明一个全局规�
 app.css
 
 ```css
-.h1 {color:red; }    //局部，style.h1被编译成一个哈希字符串，成为一个独一无二的class名字
-:global(.h2) {color: blue; }    //全局
+.h1 {color:red; }      /*局部，style.h1被编译成一个哈希字符串，成为一个独一无二的class名字*/
+:global(.h2) {color: blue; }      /*全局*/
 ```
 
 index.html
@@ -328,3 +328,4 @@ module.exports={
 	}
 }
 ```
+上面代码中，`style-loader!css-loader?modules`，它在`css-loader`后面加了一个查询参数`modules`，表示打开CSS Modules 功能。
