@@ -145,7 +145,7 @@ module.exports = {
 ```
 需安装多个依赖包：
 ```
-npm install --save babel-core babel-loader babel-preset-es2015 babel-preset-react react react-dom
+$ npm install --save babel-core babel-loader babel-preset-es2015 babel-preset-react react react-dom
 ```
 
 ### CSS加载
@@ -202,7 +202,7 @@ module.exports = {
 安装依赖：
 
 ```
-npm install --save css-loader style-loader
+$ npm install --save css-loader style-loader
 ```
 
 运行webpack,打开index.html页面，可以看到style-loader将css样式以嵌入式插入页面，见下图：  
@@ -250,7 +250,7 @@ module.exports = {
 ```
 安装依赖`url-loader`和`file-loader`：
 ```
-npm install url-loader file-loader --save
+$ npm install url-loader file-loader --save
 ```
 `'url-loader?limit=8192'`表示：当图片小于8192bytes即8KB时，会将图片生成为`data:image/png;base64,`base64图片。<br>
 demo04中，原本有small.png和big.jpg两张图片，运行webpack后，big.jpg生成了`1da144414b9e1758b5d0139275a868bc.jpg`。
@@ -374,3 +374,40 @@ module.exports={
 };
 ```
 运行后，UglifyJsPlugin将`main.js`输出压缩版本的`bundle.js`。
+
+### HTML Webpack Plugin
+这个插件的作用是依据一个简单的模板，创建出Html5文件，这个文件中自动引用了你打包后的bundle.js文件。[demo07](./demo07)
+
+main.js
+
+```javascript
+document.write('<h1>Hello World</h1>');
+```
+
+webpack.config.js
+
+```javascript
+var HtmlwebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+    entry: './main.js',
+    output: {
+        filename: 'bundle.js'
+    },
+    plugins: [
+        new HtmlwebpackPlugin({
+        	title:'webpack demo'
+        })
+    ]
+};
+```
+new HtmlwebpackPlugin()中可以配置：
+
+`title`: 用于生成的HTML文件的标题。
+
+`filename`: 用于生成的HTML文件的名称，默认是index.html。
+
+#### 安装
+```
+$ npm install html-webpack-plugin --save
+```
+然后运行webpack，生成index.html和bundle.js文件。
