@@ -378,6 +378,11 @@ module.exports={
 ### HTML Webpack Plugin
 这个插件的作用是依据一个简单的模板，创建出Html5文件，这个文件中自动引用了你打包后的bundle.js文件。[demo07](./demo07)
 
+#### 安装
+```
+$ npm install html-webpack-plugin --save
+```
+
 main.js
 
 ```javascript
@@ -406,8 +411,4 @@ new HtmlwebpackPlugin()中可以配置：
 
 `filename`: 用于生成的HTML文件的名称，默认是index.html。
 
-#### 安装
-```
-$ npm install html-webpack-plugin --save
-```
 然后运行webpack，生成index.html和bundle.js文件。
