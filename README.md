@@ -69,11 +69,6 @@ module.exports = {
 ```bash
 $ webpack
 //文件夹中生成bundle.js文件,点击index.html,可在浏览器中看到"hello world"
-
-或
-
-$ webpack-dev-server
-//可以使用 http://localhost:8080 来预览
 ```
 
 ## 功能介绍
