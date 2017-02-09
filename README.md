@@ -412,7 +412,7 @@ new HtmlwebpackPlugin()中可以配置：
 只有在开发环境中使用环境变量，才能使某些代码起作用。
 
 #### 关于webpack-dev-server:
-如果是本地安装，每次运行时需输入路径调用，如：./node_modules/.bin/webpack-dev-server
+如果是本地安装，每次运行时需输入路径调用，如：`./node_modules/.bin/webpack-dev-server`
 
 可以在package.json中的`"scripts"`处配置如下：
 ```json
@@ -422,7 +422,7 @@ new HtmlwebpackPlugin()中可以配置：
 ```
 然后运行：
 ```
-npm run dev
+$ npm run dev
 ```
 这样就可以省去输入前面的复杂路径。
 demo08配置如下：
@@ -471,3 +471,12 @@ module.exports = {
 ```
 注意node_modules和package.json需跟index.html在同一级。
 
+通过环境变量来运行`webpack-dev-server`命令
+```
+# Linux & Mac
+$ env DEBUG=true webpack-dev-server
+
+# Windows
+$ set DEBUG=true
+$ webpack-dev-server
+```
