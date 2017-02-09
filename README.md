@@ -415,7 +415,7 @@ new HtmlwebpackPlugin()中可以配置：
 如果是本地安装，每次运行时需输入路径调用，如：./node_modules/.bin/webpack-dev-server
 
 可以在package.json中的`"scripts"`处配置如下：
-```
+```json
 "scripts": {
     "dev": "webpack-dev-server --devtool eval --progress --colors"
 }
@@ -429,7 +429,7 @@ demo08配置如下：
 ```json
 "scripts": {
     "dev": "set DEBUG=true && webpack-dev-server --devtool eval --progress --colors"
-}     //注意要加&&
+}                 //注意要加&&
 ```
 [demo08](./demo08)
 
