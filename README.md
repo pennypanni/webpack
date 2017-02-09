@@ -407,3 +407,67 @@ new HtmlwebpackPlugin()中可以配置：
 `filename`: 用于生成的HTML文件的名称，默认是index.html。
 
 然后运行webpack，生成index.html和bundle.js文件。
+
+### 环境变量
+只有在开发环境中使用环境变量，才能使某些代码起作用。
+
+#### 关于webpack-dev-server:
+如果是本地安装，每次运行时需输入路径调用，如：./node_modules/.bin/webpack-dev-server
+
+可以在package.json中的`"scripts"`处配置如下：
+```
+"scripts": {
+    "dev": "webpack-dev-server --devtool eval --progress --colors"
+}
+```
+然后运行：
+```
+npm run dev
+```
+这样就可以省去输入前面的复杂路径。
+demo08配置如下：
+```json
+"scripts": {
+    "dev": "set DEBUG=true && webpack-dev-server --devtool eval --progress --colors"
+}     //注意要加&&
+```
+[demo08](./demo08)
+
+main.js
+
+```javascript
+document.write('<h1>Hello World</h1>');
+
+if (__DEV__) {
+  document.write(new Date());
+}
+```
+
+index.html
+
+```html
+<html>
+	<body>
+	  <script src="bundle.js"></script>
+	</body>
+</html>
+```
+
+webpack.config.js
+
+```javascript
+var webpack = require('webpack');
+var devFlagPlugin = new webpack.DefinePlugin({
+    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+});
+
+module.exports = {
+    entry: './main.js',
+    output: {
+      filename: 'bundle.js'
+    },
+    plugins: [devFlagPlugin]
+};
+```
+注意node_modules和package.json需跟index.html在同一级。
+
