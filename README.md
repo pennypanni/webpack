@@ -472,7 +472,7 @@ module.exports = {
 注意node_modules和package.json需跟index.html在同一级。
 
 通过环境变量来运行`webpack-dev-server`命令
-```
+```bash
 # Linux & Mac
 $ env DEBUG=true webpack-dev-server
 
