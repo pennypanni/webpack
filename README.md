@@ -540,3 +540,23 @@ module.exports = {
 $ webpack-dev-server
 ```
 表面上没什么变化，但是，webpack将`main.js`和`a.js`放到不同的chunks(bundle.js和1.bundle.js)，并且在需要的时候从`bundle.js`加载`1.bundle.js`。
+
+### 用bundle-loader分割代码
+[demo10](./demo10)只要将demo09中的`main.js`文件改改就可以了，然后安装`bundle-loader`。
+
+```bash
+$ npm install --save bundle-loader
+```
+
+main.js
+
+```javascript
+var load = require('bundle-loader!./a.js');
+
+load(function(file) {
+  document.open();
+  document.write('<h1>' + file + '</h1>');
+  document.close();
+});
+```
+运行webpack，生成2个js文件，webpack将`main.js`创建到`bundle.js`中，将`a.js`创建到`1.bundle.js`中。
