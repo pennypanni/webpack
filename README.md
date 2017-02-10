@@ -424,14 +424,14 @@ new HtmlwebpackPlugin()中可以配置：
 ```
 $ npm run dev
 ```
-这样就可以省去输入前面的复杂路径。
-demo08配置如下：
+这样就可以省去输入前面的复杂路径。注意node_modules和package.json需跟index.html在同一级。
+
+[demo08](./demo08)配置如下：
 ```json
 "scripts": {
     "dev": "set DEBUG=true && webpack-dev-server --devtool eval --progress --colors"
 }                 //注意要加&&
 ```
-[demo08](./demo08)
 
 main.js
 
@@ -469,9 +469,8 @@ module.exports = {
     plugins: [devFlagPlugin]
 };
 ```
-注意node_modules和package.json需跟index.html在同一级。
 
-通过环境变量来运行`webpack-dev-server`命令
+通过环境变量来运行`webpack-dev-server`命令(全局安装时)
 ```bash
 # Linux & Mac
 $ env DEBUG=true webpack-dev-server
