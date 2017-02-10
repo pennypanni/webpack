@@ -492,8 +492,8 @@ $ webpack-dev-server
 * `callback`: 回调函数，该函数调用时会传一个require参数
 * `chunkName`: 模块名，用于构建时生成文件时命名使用
 
-`注意点`：requi.ensure的模块只会被下载下来，不会被执行，只有在回调函数使用require(模块名)后，这个模块才会被执行。<br>
-[理解参考](http://www.cnblogs.com/3body/p/6143032.html)
+`注意点`：require.ensure的模块只会被下载下来，不会被执行，只有在回调函数使用require(模块名)后，这个模块才会被执行。<br>
+[require.ensure理解参考](http://www.cnblogs.com/3body/p/6143032.html)
 
 main.js
 
