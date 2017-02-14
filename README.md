@@ -793,3 +793,54 @@ module.exports = {
 };
 ```
 
+### 暴露全局变量（Problem?）
+
+[demo14](./demo14)如果你想使用全局变量，又不想把它们包含在Webpack bundle中，你可以在`webpack.config.js`中使用`externals`
+
+data.js
+
+```javascript
+var data = 'Hello World';
+```
+
+webpack.config.js
+
+```javascript
+module.exports = {
+    entry: './main.jsx',
+    output: {
+      filename: 'bundle.js'
+    },
+    module: {
+        loaders:[
+          {
+            test: /\.js[x]?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+              presets: ['es2015', 'react']
+            }
+          },
+        ]
+    },
+    externals: {
+      // require('data') 当做一个全局变量去引用
+      'data': 'data'
+    }
+};
+```
+
+现在，你可以在`main.jsx`中把`data`作为一个模块变量引用进来，实际上`data`是一个全局变量。
+
+main.jsx
+
+```bash
+var data = require('data');
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+ReactDOM.render(
+  <h1>{data}</h1>,
+  document.body
+);
+```
