@@ -560,3 +560,147 @@ load(function(file) {
 });
 ```
 运行webpack，生成2个js文件，webpack将`main.js`创建到`bundle.js`中，将`a.js`创建到`1.bundle.js`中。
+
+### CommonsChunkPlugin
+
+[demo11](./demo11)当多个脚本有共同的部分，可以提取公共部分为一个单独的文件,使用CommonsChunkPlugin方法。
+
+不使用CommonsChunkPlugin时：
+
+main1.jsx
+```bash
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+ReactDOM.render(
+  <h1>Hello World</h1>,
+  document.getElementById('a')
+);
+```
+
+main2.jsx
+
+```bash
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+ReactDOM.render(
+  <h2>Hello Webpack</h2>,
+  document.getElementById('b')
+);
+```
+
+index.html
+
+```html
+<html>
+  <body>
+    <div id="a"></div>
+    <div id="b"></div>
+    <script src="bundle1.js"></script>
+    <script src="bundle2.js"></script>
+  </body>
+</html>
+```
+
+webpack.config.js
+
+```javascript
+module.exports = {
+    entry: {
+      bundle1: './main1.jsx',
+      bundle2: './main2.jsx'
+    },
+    output: {
+      filename: '[name].js'
+    },
+    module: {
+      loaders:[
+        {
+          test: /\.js[x]?$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          query: {
+            presets: ['es2015', 'react']
+          }
+        }
+      ]
+    }
+}
+```
+运行webpack,生成两个js文件bundle1.js和bundle2.js
+
+```bash
+$ webpack
+Hash: 186d1167db0f4408cc83
+Version: webpack 1.14.0
+Time: 4822ms
+     Asset    Size  Chunks             Chunk Names
+bundle1.js  740 kB       0  [emitted]  bundle1
+bundle2.js  740 kB       1  [emitted]  bundle2
+    + 179 hidden modules
+```
+
+使用CommonsChunkPlugin时：<br>
+修改上面的index.html和webpack.config.js
+
+index.html
+
+```html
+<html>
+  <body>
+    <div id="a"></div>
+    <div id="b"></div>
+    <script src="init.js"></script>    <!--增加-->
+    <script src="bundle1.js"></script>
+    <script src="bundle2.js"></script>
+  </body>
+</html>
+```
+
+webpack.config.js
+
+```javascript
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");  //增加
+module.exports = {
+    entry: {
+      bundle1: './main1.jsx',
+      bundle2: './main2.jsx'
+    },
+    output: {
+      filename: '[name].js'
+    },
+    module: {
+      loaders:[
+        {
+          test: /\.js[x]?$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          query: {
+            presets: ['es2015', 'react']
+          }
+        }
+      ]
+    },
+    plugins: [
+      new CommonsChunkPlugin('init.js')   //增加，生成公共部分init.js
+    ]
+}
+```
+运行webpack，生成bundle1.js，bundle2.js和init.js
+
+```bash
+$ webpack
+Hash: 791c5fcafd4acced1024
+Version: webpack 1.14.0
+Time: 2642ms
+     Asset       Size  Chunks             Chunk Names
+bundle1.js  298 bytes       0  [emitted]  bundle1
+bundle2.js  300 bytes       1  [emitted]  bundle2
+   init.js     742 kB       2  [emitted]  init.js
+    + 179 hidden modules
+```
+
+可以对比两次运行生成的文件的大小，使用CommonsChunkPlugin方法的，打包后文件体积明显缩小。
+
+
