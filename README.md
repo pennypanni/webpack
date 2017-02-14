@@ -703,4 +703,50 @@ bundle2.js  300 bytes       1  [emitted]  bundle2
 
 可以对比两次运行生成的文件的大小，使用CommonsChunkPlugin方法的，打包后文件体积明显缩小。
 
+### Vendor chunk
+[demo12](./demo12)用CommonsChunkPlugin可以从一个脚本中提取一些代码库如`jQuery`到一个单独的文件。
 
+首先，需要安装
+```
+$ npm install jquery --save
+```
+
+main.js
+
+```javascript
+var $ = require('jquery');
+$('h1').text('Hello World');
+```
+
+index.html
+
+```html
+<html>
+  <body>
+    <h1></h1>
+    <script src="vendor.js"></script>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
+webpack.config.js
+
+```javascript
+var webpack = require('webpack');
+
+module.exports = {
+  entry: {
+    app: './main.js',
+    vendor: ['jquery'],
+  },
+  output: {
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.js')
+  ]
+};
+```
+
+运行webpack,生成`bundle.js`和`vendor.js`
