@@ -750,3 +750,46 @@ module.exports = {
 ```
 
 运行webpack,生成`bundle.js`和`vendor.js`
+
+#### 每个模块中使用jQuery
+如果你想让 $ 和jQuery在每个模块中都能使用，而不用写`require('jquery')`，你可以用`ProvidePlugin`。[官方文档](http://webpack.github.io/docs/shimming-modules.html)
+
+[demo13](./demo13)
+
+main.js
+
+```javascript
+$('h1').text('Hello World');
+```
+
+index.html
+
+```html
+<html>
+  <body>
+    <h1></h1>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
+webpack.config.js
+
+```javascript
+var webpack = require('webpack');
+
+module.exports = {
+  entry: './main.js',
+  output: {
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    })
+  ]
+};
+```
+
