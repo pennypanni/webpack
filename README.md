@@ -855,3 +855,94 @@ index.html
     </body>
 </html>
 ```
+
+### 模块热替换(Hot Module Replacement)
+
+[demo15](./demo15)在运行应用时，交换、添加或者删除模块，无需重新加载刷新页面。<br>
+1. webpack-dev-server的两个子命令
+```bash
+$ webpack-dev-server --hot --inline
+```
+这两个参数的意思是：<br>
+* `--hot`：添加`HotModuleReplacementPlugin`,切换服务器热加载模式。
+* `--inline`：把运行时的`webpack-dev-server`嵌入到`bundle`中。
+* `--hot --inline`：添加`webpack/hot/dev-server`入口。
+
+修改`webpack.config.js`
+
+* 将`new webpack.HotModuleReplacementPlugin()`添加到`plugins`中；
+* 将`webpack/hot/dev-server`和`webpack-dev-server/client?http://localhost:8080`添加到`entry`中。
+
+webpack.config.js
+
+```javascript
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = {
+  entry: [
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:8080',
+    './index.js'
+  ],
+  output: {
+    filename: 'bundle.js',
+    publicPath: '/static/'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['es2015', 'react']
+      },
+      include: path.join(__dirname, '.')
+    }]
+  }
+};
+```
+
+App.js
+
+```javascript
+import React, { Component } from 'react';
+
+export default class App extends Component {
+  render() {
+    return (
+      <h1>Hot Module Replacement</h1>
+    );
+  }
+}
+```
+
+index.js
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+index.html
+
+```html
+<html>
+  <body>
+    <div id='root'></div>
+    <script src="/static/bundle.js"></script>
+  </body>
+</html>
+```
+然后运行：
+```bash
+$ webpack-dev-server
+```
+访问http://localhost:8080，可以在浏览器中看到`Hello World`<br>
+不要关闭浏览器。编辑`App.js`中的`Hello World`为`Hot Module Replacement`,并保存。可以看到浏览器页面自动刷新出现了`Hot Module Replacement`。
