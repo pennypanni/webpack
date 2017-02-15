@@ -864,11 +864,11 @@ index.html
 $ webpack-dev-server --hot --inline
 ```
 这两个参数的意思是：<br>
-* `--hot`：添加`HotModuleReplacementPlugin`,切换服务器热加载模式。
+* `--hot`：添加`HotModuleReplacementPlugin`，切换服务器热加载模式。
 * `--inline`：把运行时的`webpack-dev-server`嵌入到`bundle`中。
 * `--hot --inline`：添加`webpack/hot/dev-server`入口。
 
-修改`webpack.config.js`
+2. 修改`webpack.config.js`
 
 * 将`new webpack.HotModuleReplacementPlugin()`添加到`plugins`中；
 * 将`webpack/hot/dev-server`和`webpack-dev-server/client?http://localhost:8080`添加到`entry`中。
