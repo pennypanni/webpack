@@ -859,7 +859,7 @@ index.html
 ### 模块热替换(Hot Module Replacement)
 
 [demo15](./demo15)在运行应用时，交换、添加或者删除模块，无需重新加载刷新页面。<br>
-1. webpack-dev-server的两个子命令
+（1）webpack-dev-server的两个子命令
 ```bash
 $ webpack-dev-server --hot --inline
 ```
@@ -868,7 +868,7 @@ $ webpack-dev-server --hot --inline
 * `--inline`：把运行时的`webpack-dev-server`嵌入到`bundle`中。
 * `--hot --inline`：添加`webpack/hot/dev-server`入口。
 
-2. 修改`webpack.config.js`
+（2）修改`webpack.config.js`
 
 * 将`new webpack.HotModuleReplacementPlugin()`添加到`plugins`中；
 * 将`webpack/hot/dev-server`和`webpack-dev-server/client?http://localhost:8080`添加到`entry`中。
