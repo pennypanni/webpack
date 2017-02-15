@@ -793,7 +793,7 @@ module.exports = {
 };
 ```
 
-### 暴露全局变量（Problem?）
+### 暴露全局变量
 
 [demo14](./demo14)如果你想使用全局变量，又不想把它们包含在Webpack bundle中，你可以在`webpack.config.js`中使用`externals`
 
@@ -843,4 +843,15 @@ ReactDOM.render(
   <h1>{data}</h1>,
   document.body
 );
+```
+
+index.html
+
+```html
+<html>
+    <body>
+        <script src="data.js"></script>   <!--这个也要引入-->
+        <script src="bundle.js"></script>
+    </body>
+</html>
 ```
