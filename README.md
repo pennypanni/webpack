@@ -946,3 +946,21 @@ $ webpack-dev-server
 ```
 访问http://localhost:8080，可以在浏览器中看到`Hello World`<br>
 不要关闭浏览器。编辑`App.js`中的`Hello World`为`Hot Module Replacement`,并保存。可以看到浏览器页面自动刷新出现了`Hot Module Replacement`。
+
+### ExtractTextPlugin
+
+在webpack中,通常会将js文件打包合并，css文件会在页面的header中嵌入style的方式载入页面。但开发过程中我们并不想将样式打在脚本中，最好可以独立生成css文件，以外链的形式加载。这时extract-text-webpack-plugin插件可以帮我们达到想要的效果。需要使用npm的方式加载插件，然后参见下面的配置，就可以将js中的css文件提取，并以指定的文件名来进行加载。
+
+npm 安装
+
+```bash
+$ npm install extract-text-webpack-plugin –save-dev
+```
+
+在webpack.config.js中配置`plugins`
+
+```javascript
+plugins: [
+  new ExtractTextPlugin('styles.css')
+]
+```
