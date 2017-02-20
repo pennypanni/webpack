@@ -2,7 +2,7 @@
 ### 安装Node.js
 Node.js 自带了软件包管理器 npm。首先用`npm -v`查看是否安装了Node.js。没有的话，先从网上下载并安装。[https://nodejs.org/en/download/](https://nodejs.org/en/download/)<br>
 点击开始--运行--cmd，输入`node --version`可以检查Node.js版本。<br>
-### 安装package.json<br>
+### 安装[package.json](http://javascript.ruanyifeng.com/nodejs/packagejson.html)<br>
 ```bash
 $ npm init      #生成package.json文件
 ```
