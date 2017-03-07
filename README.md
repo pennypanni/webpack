@@ -10,7 +10,7 @@
     - [Babel](#babel)
     - [CSS加载](#css加载)
     - [图片加载](#图片加载)
-    - [CSS组件加载](#CSS组件加载)
+    - [CSS组件加载](#css组件加载)
   - [UglifyJs插件](#uglifyjs插件)
   - [HTML Webpack Plugin](#html-webpack-plugin)
   - [环境变量](#环境变量)
